@@ -13,7 +13,10 @@ class Questions
 	end
 
 	def disp
-		puts @questionList
+		for i in 0..@questionList.length-1
+			questionNumber = i + 1
+			puts "#{questionNumber}. #{@questionList[i]}"
+		end
 	end
 
 	def add(newQuestion)
@@ -22,7 +25,8 @@ class Questions
 	end
 
 	def remove(questionNumber)
-		@questionList.delete_at(questionNumber)
+		questionIndex = questionNumber - 1
+		@questionList.delete_at(questionIndex)
 	end
 
 	def write_to_file
@@ -33,12 +37,13 @@ class Questions
 	      end
 	    end
 	end
-	
+
 end
 
 q = Questions.new
 q.set_inital_values
 q.read_into_array
-q.remove(4)
+q.disp
+q.remove(2)
 q.write_to_file
 q.disp
