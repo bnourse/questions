@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+require "pry"
+
+class Questions
+
+	def set_inital_values
+		@questionList = []
+		@questionFile = "/Users/bnourse/questions.txt"
+	end
+
+	def read_into_array
+		@questionList = File.readlines(@questionFile)
+	end
+
+	def disp
+		puts @questionList
+	end
+
+	def add(newQuestion)
+		@questionList.push(newQuestion)
+		write_to_file
+	end
+
+	def remove(questionNumber)
+		@questionList.delete_at(questionNumber)
+	end
+
+	def write_to_file
+		open(@questionFile, 'w') do |f|
+	      for question in @questionList
+	      	question = question.chomp
+	      	f.puts question
+	      end
+	    end
+	end
+	
+end
+
+q = Questions.new
+q.set_inital_values
+q.read_into_array
+q.remove(4)
+q.write_to_file
+q.disp
