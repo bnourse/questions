@@ -26,8 +26,9 @@ class Questions
 	end
 
 	def remove(questionNumber)
-		questionIndex = questionNumber - 1
+		questionIndex = questionNumber.to_i - 1
 		@questionList.delete_at(questionIndex)
+		write_to_file
 	end
 
 	def write_to_file
@@ -42,14 +43,24 @@ class Questions
 	def run
 		set_inital_values
 		read_into_array
-		doCommand(args[0], args[1])
+		doCommand(@args[0], @args[1])
 	end
 
 	def doCommand(command, commandValue)
-		if command == nil
+		case command
+		when nil
 			disp
-		else if command == "add"
+		when "add"
 			add(commandValue)
+		when "rm"
+			remove(commandValue)
+		else
+			show_usage
+		end
+	end
+
+	def show_usage
+		puts "usage info"
 	end
 end
 
