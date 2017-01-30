@@ -5,6 +5,7 @@ class Questions
 
 	def set_inital_values
 		@questionList = []
+		@args = ARGV
 		@questionFile = "/Users/bnourse/questions.txt"
 	end
 
@@ -38,12 +39,19 @@ class Questions
 	    end
 	end
 
+	def run
+		set_inital_values
+		read_into_array
+		doCommand(args[0], args[1])
+	end
+
+	def doCommand(command, commandValue)
+		if command == nil
+			disp
+		else if command == "add"
+			add(commandValue)
+	end
 end
 
 q = Questions.new
-q.set_inital_values
-q.read_into_array
-q.disp
-q.remove(2)
-q.write_to_file
-q.disp
+q.run
